@@ -4,10 +4,11 @@ import time
 import re
 from openai import OpenAI
 
-st.title("💬 Multi-Requête OpenAI avec Export CSV")
-
-# === Configuration de sécurité ===
+# Cette fonction doit être le premier appel à Streamlit
 st.set_page_config(page_title="Multi-Requête OpenAI", layout="wide")
+
+# Ensuite vous pouvez mettre le titre et le reste du code
+st.title("💬 Multi-Requête OpenAI avec Export CSV")
 
 # === Initialisation session_state pour accumuler les résultats ===
 if "results" not in st.session_state:
