@@ -25,7 +25,7 @@ with st.expander("⚙️ Configuration", expanded=not st.session_state.key_valid
     # Bouton de validation de la clé API
     if st.button("✅ Valider la clé API") and api_key:
         # Vérification basique du format de la clé API
-        if re.match(r'^sk-[A-Za-z0-9]{48}$', api_key):
+        if re.match(r'^sk-[A-Za-z0-9]{20,}$', api_key):
             try:
                 # Test de la clé API avec une requête minimale
                 client = OpenAI(api_key=api_key)
