@@ -17,6 +17,8 @@ if "results" not in st.session_state:
     st.session_state.results = []
 if "key_validated" not in st.session_state:
     st.session_state.key_validated = False
+if "api_key" not in st.session_state:
+    st.session_state.api_key = None
 
 # === INPUTS ===
 with st.expander("⚙️ Configuration", expanded=not st.session_state.key_validated):
@@ -86,8 +88,8 @@ if st.session_state.key_validated:
                     st.error(f"Erreur à la requête {i+1}: {str(e)}")
             
             # Nettoyage de la clé API de la mémoire une fois terminé
-            if "api_key" in st.session_state:
-                del st.session_state["api_key"]
+            #if "api_key" in st.session_state:
+            #    del st.session_state["api_key"]
                 
             st.success(f"✅ {num_requests} requêtes envoyées avec succès!")
 
@@ -126,4 +128,7 @@ if st.session_state.key_validated:
         # Ajouter une option pour effacer la clé API de la session
         if st.button("🔒 Déconnecter (effacer la clé API)"):
             st.session_state.key_validated = False
+            if "api_key" in st.session_state:
+                del st.session_state["api_key"]
+            st.success("🔒 Clé API effacée avec succès.")
             st.experimental_rerun()
