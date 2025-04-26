@@ -25,18 +25,15 @@ with st.expander("⚙️ Configuration", expanded=not st.session_state.key_valid
     # Bouton de validation de la clé API
     if st.button("✅ Valider la clé API") and api_key:
         # Vérification basique du format de la clé API
-        if re.match(r'^sk-[A-Za-z0-9]{20,}$', api_key):
-            try:
-                # Test de la clé API avec une requête minimale
-                client = OpenAI(api_key=api_key)
-                client.models.list()
-                st.session_state.key_validated = True
-                st.session_state.api_key = api_key  # Stockage temporaire sécurisé
-                st.success("✅ Clé API validée avec succès!")
-            except Exception as e:
-                st.error(f"❌ Erreur de validation: {str(e)}")
-        else:
-            st.error("❌ Format de clé API invalide. Elle doit commencer par 'sk-' suivi de 48 caractères.")
+        try:
+            # Test de la clé API avec une requête minimale
+            client = OpenAI(api_key=api_key)
+            client.models.list()
+            st.session_state.key_validated = True
+            st.session_state.api_key = api_key  # Stockage temporaire sécurisé
+            st.success("✅ Clé API validée avec succès!")
+        except Exception as e:
+            st.error(f"❌ Erreur de validation: {str(e)}")
 
 # Si la clé est validée, afficher le reste de l'interface
 if st.session_state.key_validated:
